@@ -9,9 +9,7 @@ import java.util.List;
  */
 public class FreecellModel extends FreecellModelAbstract {
 
-
   public static FreecellModelBuilder getBuilder() {
-
     return new FreecellModelBuilder();
   }
 
@@ -26,40 +24,31 @@ public class FreecellModel extends FreecellModelAbstract {
   }
 
   public static class FreecellModelBuilder implements FreecellOperationsBuilder {
-
     private int opensPiles;
     private int cascadesPiles;
 
     private FreecellModelBuilder() {
-
       opensPiles = 4;
       cascadesPiles = 8;
     }
 
     @Override
     public FreecellOperationsBuilder opens(int opens) {
-
       opensPiles = opens;
       return this;
     }
 
     @Override
     public FreecellOperationsBuilder cascades(int cascades) {
-
       cascadesPiles = cascades;
       return this;
     }
 
-
     @Override
     public <K> FreecellOperations<K> build() {
-
       return new FreecellModel(cascadesPiles, opensPiles);
     }
-
   }
-
-
 
   /**
    * Move a card from the given source pile to the given destination pile, if the move is valid.
@@ -82,8 +71,7 @@ public class FreecellModel extends FreecellModelAbstract {
     if (!hasGameBegun) {
       throw new IllegalStateException("Game has not begun");
     } else {
-      Cards card_shifting = new Cards();
-      List<LinkedList<Cards>> pile_source = new ArrayList<LinkedList<Cards>>();
+      Cards card_shifting;
 
       card_shifting = getCard(source, pileNumber, cardIndex);
 
