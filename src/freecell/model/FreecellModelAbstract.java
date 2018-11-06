@@ -193,7 +193,7 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
     return shifting_card;
   }
 
-  public Cards getCard(PileType source, int pileNumber, int cardIndex) {
+  public Cards getCardToMove(PileType source, int pileNumber, int cardIndex) {
     Cards card_shifting = new Cards();
     List<LinkedList<Cards>> pile_source = new ArrayList<LinkedList<Cards>>();
 
@@ -247,6 +247,7 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
 
     //1) Check if pile is empty. Move the card.
     if (this.cascadePiles.getPiles().get(destPileNumber).isEmpty()) {
+      System.out.println("this");
       this.cascadePiles.getPiles().get(destPileNumber).addLast(card_shifting);
       removeCard(source, pileNumber);
     }

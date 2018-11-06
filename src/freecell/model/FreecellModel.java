@@ -73,7 +73,7 @@ public class FreecellModel extends FreecellModelAbstract {
     } else {
       Cards card_shifting;
 
-      card_shifting = getCard(source, pileNumber, cardIndex);
+      card_shifting = getCardToMove(source, pileNumber, cardIndex);
 
       int shifting_card_value = value_table.get(card_shifting.getValue());
 
