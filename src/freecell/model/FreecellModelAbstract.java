@@ -278,7 +278,6 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
 
     //1) Check if pile is empty. Move the card.
     if (this.cascadePiles.getPiles().get(destPileNumber).isEmpty()) {
-      System.out.println("this");
       this.cascadePiles.getPiles().get(destPileNumber).addLast(cardShifting);
       removeCard(source, pileNumber);
     }

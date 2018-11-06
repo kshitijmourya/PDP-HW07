@@ -159,6 +159,7 @@ public class FreecellMultiMoveModelTest {
     testModelMultiMove.move(PileType.CASCADE, 0, 7, PileType.OPEN, 3);
     testModelMultiMove.move(PileType.CASCADE, 0, 5, PileType.OPEN, 4);
     testModelMultiMove.move(PileType.CASCADE, 0, 3, PileType.OPEN, 5);
+    System.out.println(testModelMultiMove.getGameState());
 
     testModelMultiMove.move(PileType.CASCADE, 0, 1, PileType.FOUNDATION, 0);
     testModelMultiMove.move(PileType.CASCADE, 1, 13, PileType.CASCADE, 0);
@@ -183,12 +184,18 @@ public class FreecellMultiMoveModelTest {
     testModelMultiMove.move(PileType.CASCADE, 7, 10, PileType.CASCADE, 1);
     testModelMultiMove.move(PileType.OPEN, 2, 9, PileType.CASCADE, 1);
     testModelMultiMove.move(PileType.CASCADE, 7, 8, PileType.CASCADE, 1);
+    System.out.println(testModelMultiMove.getGameState());
+    testModelMultiMove.move(PileType.OPEN, 3, 7, PileType.CASCADE, 1);
+    testModelMultiMove.move(PileType.CASCADE, 6, 6, PileType.CASCADE, 6);
+    testModelMultiMove.move(PileType.CASCADE, 7, 6, PileType.CASCADE, 6);
+    testModelMultiMove.move(PileType.CASCADE, 7, 4, PileType.OPEN, 7);
+    testModelMultiMove.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+    System.out.println(testModelMultiMove.getGameState());
+    testModelMultiMove.move(PileType.FOUNDATION, 0, 1, PileType.OPEN, 0);
+    testModelMultiMove.move(PileType.CASCADE, 1, 6, PileType.CASCADE, 0);
+   // testModelMultiMove.move(PileType.CASCADE, 1, 1, PileType.FOUNDATION, 3);
 
-    testModelMultiMove.move(PileType.CASCADE, 0, 7, PileType.CASCADE, 1);
-    testModelMultiMove.move(PileType.CASCADE, 1, 1, PileType.FOUNDATION, 3);
-    // testModel.move(PileType.CASCADE, 1, 13, PileType.FOUNDATION, 3);
-
-    System.out.println(testModel.getGameState());
+    System.out.println(testModelMultiMove.getGameState());
 
     //testModel.startGame(testModel.getDeck(), false);
     assertNotEquals(testModel.getGameState(), initialGameState);

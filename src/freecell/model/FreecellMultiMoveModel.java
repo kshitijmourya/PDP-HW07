@@ -91,10 +91,13 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
             numberCascade++;
           }
         }
-
-        int cardLimit = (int) ((numberOpen + 1) * Math.pow(2, numberCascade));
-
-        if (shifting_cards.size() > cardLimit) {
+        int k = (int) Math.pow(2,numberCascade);
+        int cardLimit = (numberOpen + 1) * k;
+        System.out.println(numberOpen);
+        System.out.println(numberCascade);
+        System.out.println(k);
+        System.out.println(cardLimit);
+        if (shifting_cards.size() >= cardLimit) {
           shifting_cards = new LinkedList<Cards>();
         } else {
           // check if card colors alternate, and if cards are ordered in same number
@@ -148,7 +151,6 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
       LinkedList<Cards> multiple_cards = new LinkedList<>();
 
       if (source == PileType.CASCADE) {
-        // System.out.println("here");
         List<LinkedList<Cards>> test_piles = new ArrayList<>();
         test_piles.addAll(this.cascadePiles.getPiles());
 
@@ -170,9 +172,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
 
         if (destination.equals(PileType.OPEN) && multiple_cards.size() == 1) {
           
-          //System.out.println("destination is OPEN");
           card_shifting = multiple_cards.get(0);
-          //System.out.println(card_shifting);
           putInOpen(source, pileNumber, destPileNumber, card_shifting);
         }
 
