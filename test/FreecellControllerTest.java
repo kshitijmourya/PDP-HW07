@@ -8,7 +8,6 @@ import java.io.StringReader;
 
 import freecell.controller.FreecellController;
 import freecell.model.FreecellModel;
-import freecell.model.FreecellModelAbstract;
 import freecell.model.FreecellOperations;
 
 public class FreecellControllerTest {
@@ -30,6 +29,9 @@ public class FreecellControllerTest {
           "C7: 2♠, 4♠, 6♠, 8♠, 10♠, Q♠\n" +
           "C8: 2♣, 4♣, 6♣, 8♣, 10♣, Q♣";
 
+  /**
+   * setup method.
+   */
   @Before
   public void setUp() {
     testModel2 = FreecellModel

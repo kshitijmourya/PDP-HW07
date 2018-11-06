@@ -49,7 +49,7 @@ public class FreecellMultiMoveModelTest {
             .getBuilder()
             .opens(8)
             .build();
-    
+
     testModel2 = FreecellMultiMoveModel
             .getBuilder()
             .cascades(4)
@@ -186,12 +186,12 @@ public class FreecellMultiMoveModelTest {
 
     testModelMultiMove.move(PileType.CASCADE, 0, 7, PileType.CASCADE, 1);
     testModelMultiMove.move(PileType.CASCADE, 1, 1, PileType.FOUNDATION, 3);
-   // testModel.move(PileType.CASCADE, 1, 13, PileType.FOUNDATION, 3);
+    // testModel.move(PileType.CASCADE, 1, 13, PileType.FOUNDATION, 3);
 
     System.out.println(testModel.getGameState());
 
     //testModel.startGame(testModel.getDeck(), false);
-    //assertEquals(testModel.getGameState(), initialGameState);
+    assertNotEquals(testModel.getGameState(), initialGameState);
   }
 
   /*

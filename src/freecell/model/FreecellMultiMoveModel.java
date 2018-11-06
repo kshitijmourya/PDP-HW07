@@ -42,7 +42,16 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
     }
   }
 
-  public LinkedList<Cards> getMultipleCardsToMove(List<LinkedList<Cards>> pilesInput, int pileNumber, int cardValue) {
+  /**
+   * Javadoc.
+   *
+   * @param pilesInput pilesinput
+   * @param pileNumber pilenumber
+   * @param cardValue  cardvalue
+   * @return cards.
+   */
+  public LinkedList<Cards> getMultipleCardsToMove(List<LinkedList<Cards>> pilesInput,
+                                                  int pileNumber, int cardValue) {
     LinkedList<Cards> shifting_cards = new LinkedList<Cards>();
     int shifting_card_value = 0;
     int count = 0;
@@ -94,7 +103,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
 
           for (Cards c : shifting_cards) {
             if (shifting_cards.indexOf(c) == 0) {
-
+              //empty block
             } else if (c.getColor() == checkColor) {
               shifting_cards = new LinkedList<Cards>();
               break;
@@ -147,13 +156,15 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         if (destination.equals(PileType.CASCADE)) {
           while (!multiple_cards.isEmpty()) {
             card_shifting = multiple_cards.poll();
-            putInCascade(source, pileNumber, destPileNumber, card_shifting, value_table.get(card_shifting.getValue()));
+            putInCascade(source, pileNumber, destPileNumber,
+                    card_shifting, value_table.get(card_shifting.getValue()));
           }
         }
 
         if (destination.equals(PileType.FOUNDATION) && multiple_cards.size() == 1) {
           card_shifting = multiple_cards.get(0);
-          putInFoundation(source, pileNumber, destPileNumber, card_shifting, value_table.get(card_shifting.getValue()));
+          putInFoundation(source, pileNumber, destPileNumber,
+                  card_shifting, value_table.get(card_shifting.getValue()));
         }
 
         if (destination.equals(PileType.OPEN) && multiple_cards.size() == 1) {

@@ -15,8 +15,10 @@ public class FreecellController<K> implements IFreecellController<K> {
   public Appendable ap;
 
   /**
-   * @param rd
-   * @param ap
+   * Constructor.
+   *
+   * @param rd readable object.
+   * @param ap appendable object.
    */
   public FreecellController(Readable rd, Appendable ap) {
     if ((rd == null) || (ap == null)) {
@@ -131,6 +133,11 @@ public class FreecellController<K> implements IFreecellController<K> {
           appendHelper("\n" + model.getGameState());
           userInput.clear();
           break;
+        /**
+         * default case.
+         */
+        default:
+          throw new IllegalStateException("Error");
 
       }
     }
@@ -189,7 +196,7 @@ public class FreecellController<K> implements IFreecellController<K> {
     if (letter.equals("O")) {
       pile = PileType.OPEN;
     } else {
-      throw new IllegalArgumentException("Invalid Pile Type Provided");
+      appendHelper("\n" + "Please enter valid pile type. Try again.");
     }
     return pile;
   }

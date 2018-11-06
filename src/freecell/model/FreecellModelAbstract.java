@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class FreecellModelAbstract implements FreecellOperations{
+public abstract class FreecellModelAbstract implements FreecellOperations {
   boolean hasGameBegun = false;
   private CardDeck deck_of_cards;
   Piles openPiles;
@@ -36,6 +36,12 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
     }
   };
 
+  /**
+   * Javadoc.
+   *
+   * @param cascades cascades
+   * @param opens    opens
+   */
   public FreecellModelAbstract(int cascades, int opens) throws IllegalArgumentException {
     this.deck_of_cards = new Cards();
     this.opens = opens;
@@ -193,6 +199,14 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
     return shifting_card;
   }
 
+  /**
+   * Placeholder javadoc.
+   *
+   * @param source     source
+   * @param pileNumber pilenumber
+   * @param cardIndex  cardindex
+   * @return cards
+   */
   public Cards getCardToMove(PileType source, int pileNumber, int cardIndex) {
     Cards card_shifting = new Cards();
     List<LinkedList<Cards>> pile_source = new ArrayList<LinkedList<Cards>>();
@@ -224,22 +238,39 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
     return card_shifting;
   }
 
+  /**
+   * Javadoc.
+   *
+   * @param source         source
+   * @param pileNumber     pileNumber
+   * @param destPileNumber destPileNumber
+   * @param cardShifting   cardShifting.
+   */
   public void putInOpen(PileType source, int pileNumber,
-                        int destPileNumber, Cards card_shifting) {
+                        int destPileNumber, Cards cardShifting) {
     if (!this.openPiles.getPiles().get(destPileNumber).isEmpty()) {
       throw new IllegalArgumentException("Pile is not empty");
     } else {
       this.openPiles
               .getPiles()
               .get(destPileNumber)
-              .addFirst(card_shifting);
+              .addFirst(cardShifting);
       removeCard(source, pileNumber);
     }
   }
 
+  /**
+   * Placeholder javadoc.
+   *
+   * @param source            source
+   * @param pileNumber        pilenumber
+   * @param destPileNumber    destination pile number
+   * @param cardShifting      card shifting.
+   * @param shiftingCardValue shifting card value.
+   */
   public void putInCascade(PileType source, int pileNumber,
-                           int destPileNumber, Cards card_shifting, int shifting_card_value) {
-//Check for card at destination.
+                           int destPileNumber, Cards cardShifting, int shiftingCardValue) {
+    //Check for card at destination.
     //compare both cards.
     //Allow the move only when conditions are fulfilled.
     //Colour should be opposite and value should be one less than the card present there.
@@ -248,7 +279,7 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
     //1) Check if pile is empty. Move the card.
     if (this.cascadePiles.getPiles().get(destPileNumber).isEmpty()) {
       System.out.println("this");
-      this.cascadePiles.getPiles().get(destPileNumber).addLast(card_shifting);
+      this.cascadePiles.getPiles().get(destPileNumber).addLast(cardShifting);
       removeCard(source, pileNumber);
     }
 
@@ -256,19 +287,19 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
     //They should have different colours.
     //Value should be one less than the card present.
     else if (!this.cascadePiles.getPiles().get(destPileNumber).isEmpty()
-            && shifting_card_value -
+            && shiftingCardValue -
             value_table
                     .get(this.cascadePiles.getPiles()
                             .get(destPileNumber)
                             .peekLast()
                             .getValue()) == -1
-            && !card_shifting.getColor().equals(
+            && !cardShifting.getColor().equals(
             this.cascadePiles
                     .getPiles()
                     .get(destPileNumber)
                     .peekLast()
                     .getColor())) {
-      this.cascadePiles.getPiles().get(destPileNumber).addLast(card_shifting);
+      this.cascadePiles.getPiles().get(destPileNumber).addLast(cardShifting);
       removeCard(source, pileNumber);
     } else {
       throw new IllegalArgumentException("Invalid Move");
@@ -276,35 +307,44 @@ public abstract class FreecellModelAbstract implements FreecellOperations{
 
   }
 
+  /**
+   * Javadoc.
+   *
+   * @param source            source
+   * @param pileNumber        pilenumber
+   * @param destPileNumber    destinationpilenumber.
+   * @param cardShifting      cardshifting.
+   * @param shiftingCardValue shifting card value.
+   */
   public void putInFoundation(PileType source, int pileNumber,
-                              int destPileNumber, Cards card_shifting, int shifting_card_value) {
+                              int destPileNumber, Cards cardShifting, int shiftingCardValue) {
     // if pile is empty and the card being moved is an ACE, then add it to the pile.
     if (this.foundationPiles.getPiles().get(destPileNumber).isEmpty()
-            && shifting_card_value == 1) {
-      this.foundationPiles.getPiles().get(destPileNumber).addFirst(card_shifting);
+            && shiftingCardValue == 1) {
+      this.foundationPiles.getPiles().get(destPileNumber).addFirst(cardShifting);
       removeCard(source, pileNumber);
     }
     // if pile is not empty, card value is 1 level higher than current card in pile,
     // and card to be added has the suite matching that of the cards in the pile
     // the add the card.
     else if (!this.foundationPiles.getPiles().get(destPileNumber).isEmpty()
-            && shifting_card_value -
+            && shiftingCardValue -
             value_table
                     .get(this.foundationPiles.getPiles()
                             .get(destPileNumber)
                             .peekLast()
                             .getValue()) == 1
-            && card_shifting.getColor().equals(
+            && cardShifting.getColor().equals(
             this.foundationPiles
                     .getPiles()
                     .get(destPileNumber)
                     .peekLast()
                     .getColor())) {
       removeCard(source, pileNumber);
-      this.foundationPiles.getPiles().get(destPileNumber).addLast(card_shifting);
-    } else {
-      throw new IllegalArgumentException("Invalid Move");
-    }
+      this.foundationPiles.getPiles().get(destPileNumber).addLast(cardShifting);
+    } //else {
+    //throw new IllegalArgumentException("Invalid Move");
+    //}
   }
 
   /**
