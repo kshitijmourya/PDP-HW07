@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 import freecell.model.FreecellOperations;
 import freecell.model.PileType;
 
@@ -20,6 +19,9 @@ public class FreecellController<K> implements IFreecellController<K> {
    * @param ap
    */
   public FreecellController(Readable rd, Appendable ap) {
+    if ((rd == null) || (ap == null)) {
+      throw new IllegalArgumentException("Readable/Appendable objects are null");
+    }
     this.rd = rd;
     this.ap = ap;
   }
@@ -43,7 +45,7 @@ public class FreecellController<K> implements IFreecellController<K> {
       throw new IllegalArgumentException("The deck cannot be null.");
     }
     if (model == null) {
-      throw new IllegalArgumentException("The model cannot tbe null");
+      throw new IllegalArgumentException("The model cannot be null");
     }
     if ((rd == null) || (ap == null)) {
       throw new IllegalStateException("Readable or appendable objects cannot be null.");
@@ -53,23 +55,22 @@ public class FreecellController<K> implements IFreecellController<K> {
       model.startGame(deck, shuffle);
     } catch (IllegalArgumentException e) {
       appendHelper("Unable to start game.");
-      e.printStackTrace();
+      //e.printStackTrace();
     }
+    appendHelper(model.getGameState());
     Scanner scan = new Scanner(this.rd);
     ArrayList<String> userInput = new ArrayList<String>();
-    appendHelper(model.getGameState());
 
     while (scan.hasNext()) {
 
       String s = scan.next();
 
-      // checks if the input is 'q' or 'Q'
-      if (s.startsWith("q") || s.startsWith("Q")) {
+
+      if (s.equals("Q") || s.equals("q")) {
         appendHelper("\n" + "Game quit prematurely.");
         return;
       }
 
-      // checks card index, source pile and destination pile here
 
       if (userInput.size() == 1) {
         try {
@@ -93,17 +94,16 @@ public class FreecellController<K> implements IFreecellController<K> {
         }
       }
 
-      // Once the userInput contains all the valid inputs for a move, come here.
       if (userInput.size() == 3) {
         PileType sourcePile = getPileType(userInput.get(0));
         int sourcePileIndex = getIndex(userInput.get(0));
         int cardIndex = getIndex(userInput.get(1));
-        PileType destPile = getPileType(userInput.get(2));
-        int destPileIndex = getIndex(userInput.get(2));
+        PileType destinationPile = getPileType(userInput.get(2));
+        int destinationPileIndex = getIndex(userInput.get(2));
 
         try {
-          model.move(sourcePile, sourcePileIndex - 1, cardIndex - 1, destPile,
-                  destPileIndex - 1);
+          model.move(sourcePile, sourcePileIndex - 1,
+                  cardIndex - 1, destinationPile, destinationPileIndex - 1);
         } catch (IllegalArgumentException e) {
           appendHelper("\n" + e.getMessage());
         }
@@ -140,10 +140,11 @@ public class FreecellController<K> implements IFreecellController<K> {
   }
 
 
-  private boolean isValidPile(String c) {
-    String firstChar = c.substring(0, 1);
-    String index = c.substring(1);
-    if (!(firstChar.equals("C") || firstChar.equals("F") || firstChar.equals("O"))) {
+  private boolean isValidPile(String s) {
+    String letter = s.substring(0, 1);
+    String index = s.substring(1);
+
+    if (!(letter.equals("F") || letter.equals("O") || letter.equals("C"))) {
       throw new IllegalArgumentException();
     } else {
       try {
@@ -151,10 +152,9 @@ public class FreecellController<K> implements IFreecellController<K> {
       } catch (NumberFormatException e) {
         throw new IllegalArgumentException("Invalid pile. Try again.");
       } catch (NullPointerException e) {
-        throw new IllegalArgumentException("The pile needs to be followed by number. Try again.");
+        throw new IllegalArgumentException("No Pile number given. Try again");
       }
     }
-    // only got here if we didn't return false
     return true;
   }
 
@@ -170,22 +170,21 @@ public class FreecellController<K> implements IFreecellController<K> {
 
 
   private PileType getPileType(String c) {
-    String firstChar = c.substring(0, 1);
-    PileType result = null;
-    switch (firstChar) {
-      case "C":
-        result = PileType.CASCADE;
-        break;
-      case "F":
-        result = PileType.FOUNDATION;
-        break;
-      case "O":
-        result = PileType.OPEN;
-        break;
-      default:
-        throw new IllegalArgumentException("Invalid pile.");
+    String letter = c.substring(0, 1);
+    PileType pile = null;
+
+    if (letter.equals("C")) {
+      pile = PileType.CASCADE;
     }
-    return result;
+    if (letter.equals("F")) {
+      pile = PileType.FOUNDATION;
+    }
+    if (letter.equals("O")) {
+      pile = PileType.OPEN;
+    } else {
+      throw new IllegalArgumentException("Invalid pile");
+    }
+    return pile;
   }
 
   private int getIndex(String c) {
@@ -197,7 +196,6 @@ public class FreecellController<K> implements IFreecellController<K> {
     } else {
       index = c.substring(1);
     }
-
     result = Integer.parseInt(index);
     return result;
   }

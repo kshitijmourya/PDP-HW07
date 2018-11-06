@@ -87,24 +87,24 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         if (shifting_cards.size() > cardLimit) {
           shifting_cards = new LinkedList<Cards>();
         } else {
-        // check if card colors alternate, and if cards are ordered in same number
-        // if they are then keep list as is, else make list empty.
-        CardColor checkColor = shifting_cards.get(0).getColor();
-        int checkValue = value_table.get(shifting_cards.get(0).getValue());
+          // check if card colors alternate, and if cards are ordered in same number
+          // if they are then keep list as is, else make list empty.
+          CardColor checkColor = shifting_cards.get(0).getColor();
+          int checkValue = value_table.get(shifting_cards.get(0).getValue());
 
-        for (Cards c : shifting_cards) {
-          if (shifting_cards.indexOf(c) == 0) {
+          for (Cards c : shifting_cards) {
+            if (shifting_cards.indexOf(c) == 0) {
 
-          } else if (c.getColor() == checkColor) {
-            shifting_cards = new LinkedList<Cards>();
-            break;
-          } else if (value_table.get(c.getValue()) - checkValue != -1) {
-            shifting_cards = new LinkedList<Cards>();
-            break;
-          } else {
-            checkColor = c.getColor();
-            checkValue = value_table.get(c.getValue());
-          }
+            } else if (c.getColor() == checkColor) {
+              shifting_cards = new LinkedList<Cards>();
+              break;
+            } else if (value_table.get(c.getValue()) - checkValue != -1) {
+              shifting_cards = new LinkedList<Cards>();
+              break;
+            } else {
+              checkColor = c.getColor();
+              checkValue = value_table.get(c.getValue());
+            }
           }
         }
       }
@@ -138,7 +138,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
       LinkedList<Cards> multiple_cards = new LinkedList<>();
 
       if (source == PileType.CASCADE) {
-        System.out.println("here");
+        // System.out.println("here");
         List<LinkedList<Cards>> test_piles = new ArrayList<>();
         test_piles.addAll(this.cascadePiles.getPiles());
 
@@ -152,14 +152,14 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
 
         if (destination.equals(PileType.FOUNDATION) && multiple_cards.size() == 1) {
-            card_shifting = multiple_cards.get(0);
-            putInFoundation(source, pileNumber, destPileNumber, card_shifting, value_table.get(card_shifting.getValue()));
+          card_shifting = multiple_cards.get(0);
+          putInFoundation(source, pileNumber, destPileNumber, card_shifting, value_table.get(card_shifting.getValue()));
         }
 
         if (destination.equals(PileType.OPEN) && multiple_cards.size() == 1) {
-          System.out.println("destination is OPEN");
+          //System.out.println("destination is OPEN");
           card_shifting = multiple_cards.get(0);
-          System.out.println(card_shifting);
+          //System.out.println(card_shifting);
           putInOpen(source, pileNumber, destPileNumber, card_shifting);
         }
 

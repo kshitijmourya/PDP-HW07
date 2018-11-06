@@ -1,5 +1,7 @@
 import java.util.List;
 
+import freecell.controller.FreecellController;
+import freecell.controller.IFreecellController;
 import freecell.model.FreecellModel;
 
 public class TestMain {
@@ -9,6 +11,8 @@ public class TestMain {
    * @param args args.
    */
   public static void main(String[] args) {
+
+
     helper(FreecellModel
             .getBuilder()
             .cascades(52)
