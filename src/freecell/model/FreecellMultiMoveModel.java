@@ -93,6 +93,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
 
         int cardLimit = (int) ((numberOpen + 1) * Math.pow(2, numberCascade));
+
         if (shifting_cards.size() > cardLimit) {
           shifting_cards = new LinkedList<Cards>();
         } else {
@@ -168,6 +169,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
 
         if (destination.equals(PileType.OPEN) && multiple_cards.size() == 1) {
+          
           //System.out.println("destination is OPEN");
           card_shifting = multiple_cards.get(0);
           //System.out.println(card_shifting);

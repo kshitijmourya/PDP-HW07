@@ -1,7 +1,5 @@
 import java.util.List;
 
-import freecell.controller.FreecellController;
-import freecell.controller.IFreecellController;
 import freecell.model.FreecellModel;
 
 public class TestMain {
@@ -124,11 +122,11 @@ public class TestMain {
     //Invalid moves
 
     //cascade to open--pile is not empty
-   // model.move(PileType.CASCADE,6,0,PileType.OPEN,0);
+    // model.move(PileType.CASCADE,6,0,PileType.OPEN,0);
     //cascade to foundation-- invalid move works both on empty and with card
     //model.move(PileType.CASCADE,6,0,PileType.FOUNDATION,1);
     //cascade to cascade
-   // model.move(PileType.CASCADE,0,0,PileType.CASCADE,4);
+    // model.move(PileType.CASCADE,0,0,PileType.CASCADE,4);
 
 
     //Foundation to open
