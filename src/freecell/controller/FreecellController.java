@@ -26,6 +26,13 @@ public class FreecellController<K> implements IFreecellController<K> {
     this.ap = ap;
   }
 
+  private void appendHelper(String s) {
+    try {
+      ap.append(s);
+    } catch (IOException o) {
+      o.printStackTrace();
+    }
+  }
 
   /**
    * Start and play a new game of freecell with the provided deck. This deck should be used as-is.
@@ -51,84 +58,84 @@ public class FreecellController<K> implements IFreecellController<K> {
       throw new IllegalStateException("Readable or appendable objects cannot be null.");
     }
 
+    if (model.isGameOver()) {
+      appendHelper("\n" + "Game over.");
+      return;
+    }
+
     try {
       model.startGame(deck, shuffle);
     } catch (IllegalArgumentException e) {
       appendHelper("Unable to start game.");
       //e.printStackTrace();
     }
+
     appendHelper(model.getGameState());
     Scanner scan = new Scanner(this.rd);
     ArrayList<String> userInput = new ArrayList<String>();
 
     while (scan.hasNext()) {
-
       String s = scan.next();
-
-
       if (s.equals("Q") || s.equals("q")) {
         appendHelper("\n" + "Game quit prematurely.");
         return;
       }
+      int inputSize = userInput.size();
+      switch (inputSize) {
 
-
-      if (userInput.size() == 1) {
-        try {
-          if (isValidCardIndex(s)) {
-            userInput.add(s);
+        case 0:
+          try {
+            if (isPileValid(s)) {
+              userInput.add(s);
+            }
+          } catch (IllegalArgumentException e) {
+            appendHelper("\n" + "Source pile is invalid. Try again.");
           }
-        } catch (IllegalArgumentException e) {
-          appendHelper("\n" + e.getMessage());
-        }
-      } else if ((userInput.size() == 0) || (userInput.size() == 2)) {
-        try {
-          if (isValidPile(s)) {
-            userInput.add(s);
+          break;
+
+        case 1:
+          try {
+            if (isCardIndexValid(s)) {
+              userInput.add(s);
+            }
+          } catch (IllegalArgumentException e) {
+            appendHelper("\n" + e.getMessage());
           }
-        } catch (IllegalArgumentException e) {
-          if (userInput.size() == 2) {
-            appendHelper("\n" + "Invalid destination pile. Try again.");
-          } else {
-            appendHelper("\n" + "Invalid source pile. Try again.");
+          break;
+
+
+        case 2:
+          try {
+            if (isPileValid(s)) {
+              userInput.add(s);
+            }
+          } catch (IllegalArgumentException e) {
+            appendHelper("\n" + "Destination pile is invalid. Try again.");
           }
-        }
-      }
+          break;
 
-      if (userInput.size() == 3) {
-        PileType sourcePile = getPileType(userInput.get(0));
-        int sourcePileIndex = getIndex(userInput.get(0));
-        int cardIndex = getIndex(userInput.get(1));
-        PileType destinationPile = getPileType(userInput.get(2));
-        int destinationPileIndex = getIndex(userInput.get(2));
+        case 3:
+          PileType sourcePile = getPileType(userInput.get(0));
+          int sourcePileIndex = getIndex(userInput.get(0));
+          int cardIndex = getIndex(userInput.get(1));
+          PileType destinationPile = getPileType(userInput.get(2));
+          int destinationPileIndex = getIndex(userInput.get(2));
 
-        try {
-          model.move(sourcePile, sourcePileIndex - 1,
-                  cardIndex - 1, destinationPile, destinationPileIndex - 1);
-        } catch (IllegalArgumentException e) {
-          appendHelper("\n" + e.getMessage());
-        }
+          try {
+            model.move(sourcePile, sourcePileIndex - 1,
+                    cardIndex - 1, destinationPile, destinationPileIndex - 1);
+          } catch (IllegalArgumentException e) {
+            appendHelper("\n" + e.getMessage());
+          }
 
-        appendHelper("\n" + model.getGameState());
-        userInput.clear();
+          appendHelper("\n" + model.getGameState());
+          userInput.clear();
+          break;
+
       }
     }
-
-    if (model.isGameOver()) {
-      appendHelper("\n" + "Game over.");
-      return;
-    }
-
-    return;
   }
 
-
-  private void appendHelper(String s) {
-    try {
-      ap.append(s);
-    } catch (IOException o) {
-      o.printStackTrace();
-    }
-  }
 
   private boolean isInteger(String s) {
     try {
@@ -140,7 +147,7 @@ public class FreecellController<K> implements IFreecellController<K> {
   }
 
 
-  private boolean isValidPile(String s) {
+  private boolean isPileValid(String s) {
     String letter = s.substring(0, 1);
     String index = s.substring(1);
 
@@ -158,7 +165,7 @@ public class FreecellController<K> implements IFreecellController<K> {
     return true;
   }
 
-  private boolean isValidCardIndex(String c) {
+  private boolean isCardIndexValid(String c) {
     try {
       return Integer.parseInt(c) >= 1;
     } catch (NumberFormatException e) {
@@ -182,7 +189,7 @@ public class FreecellController<K> implements IFreecellController<K> {
     if (letter.equals("O")) {
       pile = PileType.OPEN;
     } else {
-      throw new IllegalArgumentException("Invalid pile");
+      throw new IllegalArgumentException("Invalid Pile Type Provided");
     }
     return pile;
   }
