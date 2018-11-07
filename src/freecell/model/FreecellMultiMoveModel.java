@@ -43,7 +43,8 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
   }
 
   /**
-   * Javadoc.
+   * method which gets multiple cards to move. it checks all the conditions required to move
+   * multiple cards.
    *
    * @param pilesInput pilesinput
    * @param pileNumber pilenumber
@@ -163,14 +164,14 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
       }
 
       int cardLimit = (int) ((numberOpen + 1) * Math.pow(2, numberCascade));
-      System.out.println(cardLimit);
+      //System.out.println(cardLimit);
 
       LinkedList<Cards> multiple_cards = new LinkedList<>();
       List<LinkedList<Cards>> test_piles2 = new ArrayList<>();
       test_piles2.addAll(this.cascadePiles.getPiles());
       multiple_cards = getMultipleCardsToMove(test_piles2, pileNumber, cardIndex);
 
-      System.out.println(multiple_cards.size());
+      //System.out.println(multiple_cards.size());
 
 
       if (multiple_cards.size() <= cardLimit) {

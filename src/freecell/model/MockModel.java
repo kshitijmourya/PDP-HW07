@@ -8,10 +8,10 @@ public final class MockModel implements FreecellOperations {
 
   private StringBuilder log;
   private final int uniqueCode;
-  private int counter;
+
 
   /**
-   * Mockmodel created for testing.
+   * MockModel.
    *
    * @param log        log
    * @param uniqueCode uniquecode
@@ -20,7 +20,7 @@ public final class MockModel implements FreecellOperations {
 
     this.log = log;
     this.uniqueCode = uniqueCode;
-    this.counter = 0;
+
   }
 
   @Override
@@ -32,7 +32,7 @@ public final class MockModel implements FreecellOperations {
   @Override
   public void startGame(List deck, boolean shuffle) throws IllegalArgumentException {
 
-    System.out.println("startGame");
+    System.out.println("Inside mock model startgame");
   }
 
   @Override
@@ -41,18 +41,18 @@ public final class MockModel implements FreecellOperations {
 
     log.append("Input: " + source + " " + pileNumber
             + " " + cardIndex + " " + destination + " " + destPileNumber + "\n");
-    counter++;
+
   }
 
   @Override
   public boolean isGameOver() {
 
-    return true;
+    return false;
   }
 
   @Override
   public String getGameState() {
 
-    return uniqueCode + " : " + counter;
+    return uniqueCode + " : ";
   }
 }
