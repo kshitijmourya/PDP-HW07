@@ -11,7 +11,7 @@ public class FreecellModel extends FreecellModelAbstract {
   }
 
   /**
-   * creates new freecellmodel.
+   * Creates new freecellmodel.
    *
    * @param cascades cascades piles.
    * @param opens    opens piles.
@@ -90,12 +90,14 @@ public class FreecellModel extends FreecellModelAbstract {
   }
 
   /**
-   * Javadoc.
+   * Helper method that will take in the card to be placed into an open pile. If the pile is empty,
+   * it will place the card and then remove it from the source. If the pile is not empty it will
+   * not place the card at the destination and not remove the card from the source.
    *
-   * @param source         source
-   * @param pileNumber     pileNumber
-   * @param destPileNumber destPileNumber
-   * @param cardShifting   cardShifting.
+   * @param source         source pile type.
+   * @param pileNumber     pile index number.
+   * @param destPileNumber index number for the destination pile.
+   * @param cardShifting   copy of card that is shifting.
    */
   public void putInOpen(PileType source, int pileNumber,
                         int destPileNumber, Cards cardShifting) {
@@ -111,12 +113,15 @@ public class FreecellModel extends FreecellModelAbstract {
   }
 
   /**
-   * Placeholder javadoc.
+   * Helper method that will take in the card to be placed into a cascade pile. If the pile is empty,
+   * it will place the card and then remove it from the source. If the pile is not empty it will
+   * check if the card can be moved legally at the destination, then place it in the destination and
+   * remove the card from the source if legal.
    *
-   * @param source            source
-   * @param pileNumber        pilenumber
-   * @param destPileNumber    destination pile number
-   * @param cardShifting      card shifting.
+   * @param source         source pile type.
+   * @param pileNumber     pile index number.
+   * @param destPileNumber index number for the destination pile.
+   * @param cardShifting   copy of card that is shifting.
    * @param shiftingCardValue shifting card value.
    */
   public void putInCascade(PileType source, int pileNumber,
@@ -158,12 +163,15 @@ public class FreecellModel extends FreecellModelAbstract {
   }
 
   /**
-   * Javadoc.
+   * Helper method that will take in the card to be placed into a foundation pile. If the pile is empty,
+   * it will place the card and then remove it from the source. If the pile is not empty it will
+   * check if the card can be moved legally at the destination, then place it in the destination and
+   * remove the card from the source if legal.
    *
-   * @param source            source
-   * @param pileNumber        pilenumber
-   * @param destPileNumber    destinationpilenumber.
-   * @param cardShifting      cardshifting.
+   * @param source         source pile type.
+   * @param pileNumber     pile index number.
+   * @param destPileNumber index number for the destination pile.
+   * @param cardShifting   copy of card that is shifting.
    * @param shiftingCardValue shifting card value.
    */
   public void putInFoundation(PileType source, int pileNumber,

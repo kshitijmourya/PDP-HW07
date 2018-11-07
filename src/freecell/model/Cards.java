@@ -24,7 +24,7 @@ public class Cards implements CardDeck {
   }
 
   /**
-   * constructor which initializes the values.
+   * Constructor which initializes the values.
    *
    * @param value value.
    * @param color color of card.
@@ -37,7 +37,7 @@ public class Cards implements CardDeck {
   }
 
   /**
-   * gives which suite the card belongs.
+   * Gives which suite the card belongs.
    *
    * @return suite name.
    */
@@ -47,7 +47,7 @@ public class Cards implements CardDeck {
   }
 
   /**
-   * gives value of the card.
+   * Gives value of the card.
    *
    * @return value of the card.
    */
@@ -57,7 +57,7 @@ public class Cards implements CardDeck {
   }
 
   /**
-   * gives the colour the card.
+   * Gives the colour the card.
    *
    * @return color of the card.
    */
@@ -67,7 +67,7 @@ public class Cards implements CardDeck {
   }
 
   /**
-   * creates a new deck.
+   * Creates a new deck.
    *
    * @return list of cards as a deck.
    */
@@ -87,7 +87,7 @@ public class Cards implements CardDeck {
 
 
   /**
-   * tostring method.
+   * toString method.
    *
    * @return string of value and suite to print.
    */

@@ -172,14 +172,13 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
   }
 
   /**
-   * method to getshiftingcard.
+   * Method to obtain a copy of the card that is shifting.
    *
    * @param pilesInput input pile type.
    * @param pileNumber input pile number.
    * @param cardValue  the face value of card.
    * @return the card to shift.
    */
-
   public Cards getShiftingCard(List<LinkedList<Cards>> pilesInput, int pileNumber, int cardValue) {
     Cards shifting_card = new Cards();
     // check if chosen pile is empty
