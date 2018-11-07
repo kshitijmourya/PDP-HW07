@@ -18,7 +18,6 @@ public class FreecellMultiMoveModelTest {
   private FreecellOperations testModelMultiMove;
   private FreecellOperations testModel2;
   private FreecellOperations testModel3;
-  private FreecellOperations testModel4;
   private String initialGameState = "F1:\n" +
           "F2:\n" +
           "F3:\n" +
@@ -63,7 +62,7 @@ public class FreecellMultiMoveModelTest {
             .opens(4)
             .build();
 
-    testModel4 = FreecellMultiMoveModel
+    FreecellOperations testModel4 = FreecellMultiMoveModel
             .getBuilder()
             .cascades(10)
             .opens(1)
@@ -158,6 +157,29 @@ public class FreecellMultiMoveModelTest {
   public void testStartGameShuffle() {
     testModel.startGame(testModel.getDeck(), true);
     assertNotEquals(testModel.getGameState(), initialGameState);
+  }
+
+  @Test
+  public void testGameStateafterException() {
+    testModel.startGame(testModel.getDeck(), false);
+    testModel.move(PileType.FOUNDATION, 0, 0, PileType.OPEN, 2);
+    System.out.println(testModel.getGameState());
+    assertEquals(testModel.getGameState(), "F1:\n" +
+            "F2:\n" +
+            "F3:\n" +
+            "F4:\n" +
+            "O1:\n" +
+            "O2:\n" +
+            "O3:\n" +
+            "O4:\n" +
+            "C1: A♥, 3♥, 5♥, 7♥, 9♥, J♥, K♥\n" +
+            "C2: A♦, 3♦, 5♦, 7♦, 9♦, J♦, K♦\n" +
+            "C3: A♠, 3♠, 5♠, 7♠, 9♠, J♠, K♠\n" +
+            "C4: A♣, 3♣, 5♣, 7♣, 9♣, J♣, K♣\n" +
+            "C5: 2♥, 4♥, 6♥, 8♥, 10♥, Q♥\n" +
+            "C6: 2♦, 4♦, 6♦, 8♦, 10♦, Q♦\n" +
+            "C7: 2♠, 4♠, 6♠, 8♠, 10♠, Q♠\n" +
+            "C8: 2♣, 4♣, 6♣, 8♣, 10♣, Q♣");
   }
 
   @Test
@@ -270,42 +292,6 @@ public class FreecellMultiMoveModelTest {
     assertNotEquals(testModel.getGameState(), initialGameState);
   }
 
-  @Test(expected = IllegalArgumentException.class)
-  public void testMove() {
-    testModelMultiMove.startGame(testModelMultiMove.getDeck(), false);
-
-    //Valid moves
-    //cascade to open
-
-    //System.out.println(testModelMultiMove.getGameState());
-    testModelMultiMove.move(PileType.CASCADE, 0, 13, PileType.OPEN, 0);
-    //cascade to foundation
-    testModelMultiMove.move(PileType.CASCADE, 1, 13, PileType.OPEN, 1);
-    //cascade to cascade
-    testModelMultiMove.move(PileType.CASCADE, 2, 13, PileType.OPEN, 5);
-
-    //Invalid moves
-    System.out.println(testModelMultiMove.getGameState());
-    //cascade to open--pile is not empty
-
-    //testModel3.move(PileType.CASCADE, 6, 2, PileType.OPEN, 0);
-    //testModel3.move(PileType.CASCADE, 7, 2, PileType.OPEN, 0);
-    //fail();
-    //cascade to foundation-- invalid move works both on empty and with card
-    //testModel3.move(PileType.CASCADE, 6, 2, PileType.FOUNDATION, 1);
-    //fail();
-    //cascade to cascade
-    //testModel3.move(PileType.CASCADE, 0, 1, PileType.CASCADE, 4);
-    //fail();
-
-
-    //Foundation to open
-    //testModel3.move(PileType.FOUNDATION, 1, 0, PileType.OPEN, 2);
-    //Foundation to cascade
-    //testModel3.move(PileType.FOUNDATION, 1, 0, PileType.CASCADE, 0);
-    //fail();
-  }
-
 
   @Test
   public void testisGameOverNo() {
@@ -361,7 +347,7 @@ public class FreecellMultiMoveModelTest {
     testModel3.move(PileType.CASCADE, 28, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 29, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 30, 0, PileType.FOUNDATION, 2);
-    System.out.println(testModel3.getGameState());
+    //System.out.println(testModel3.getGameState());
     testModel3.move(PileType.CASCADE, 31, 0, PileType.FOUNDATION, 3);
 
     testModel3.move(PileType.CASCADE, 32, 0, PileType.FOUNDATION, 0);
@@ -399,25 +385,181 @@ public class FreecellMultiMoveModelTest {
 
 
   @Test
-  public void test1() {
-    testModel4.startGame(testModel4.getDeck(), false);
-    System.out.println(testModel4.getGameState());
+  public void testValidCascadeMoves() {
+    testModel3.startGame(testModel3.getDeck(), false);
+    System.out.println(testModel3.getGameState());
 
-    //cascade to cascade
-    testModel4.move(PileType.CASCADE, 4, 0, PileType.CASCADE, 0);
-    testModel4.move(PileType.CASCADE, 2, 0, PileType.CASCADE, 0);
-    testModel4.move(PileType.CASCADE, 0, 1, PileType.CASCADE, 1);
-    testModel4.move(PileType.CASCADE, 6, 0, PileType.CASCADE, 8);
-    testModel4.move(PileType.CASCADE, 6, 0, PileType.CASCADE, 1);
-    //testModel4.move(PileType.CASCADE,1,2,PileType.CASCADE,0);
-
-    System.out.println(testModel4.getGameState());
-    assertEquals(testModel4.isGameOver(), false);
+    //cascade to cascade single
+    testModel3.move(PileType.CASCADE, 0, 0, PileType.CASCADE, 7);
 
 
+    //cascade to cascade multiple
+    testModel3.move(PileType.CASCADE, 7, 1, PileType.CASCADE, 8);
+    testModel3.move(PileType.CASCADE, 8, 2, PileType.CASCADE, 14);
+
+    //cascade to open pile
+    testModel3.move(PileType.CASCADE, 9, 0, PileType.OPEN, 0);
+
+
+    //cascade to foundation pile
+    testModel3.move(PileType.CASCADE, 1, 0, PileType.FOUNDATION, 1);
+    System.out.println(testModel3.getGameState());
+
+    assertEquals(testModel3.getGameState(), "F1:\n" +
+            "F2: A♦\n" +
+            "F3:\n" +
+            "F4:\n" +
+            "O1: 3♦\n" +
+            "O2:\n" +
+            "O3:\n" +
+            "O4:\n" +
+            "C1:\n" +
+            "C2:\n" +
+            "C3: A♠\n" +
+            "C4: A♣\n" +
+            "C5: 2♥\n" +
+            "C6: 2♦\n" +
+            "C7: 2♠\n" +
+            "C8:\n" +
+            "C9:\n" +
+            "C10:\n" +
+            "C11: 3♠\n" +
+            "C12: 3♣\n" +
+            "C13: 4♥\n" +
+            "C14: 4♦\n" +
+            "C15: 4♠, 3♥, 2♣, A♥\n" +
+            "C16: 4♣\n" +
+            "C17: 5♥\n" +
+            "C18: 5♦\n" +
+            "C19: 5♠\n" +
+            "C20: 5♣\n" +
+            "C21: 6♥\n" +
+            "C22: 6♦\n" +
+            "C23: 6♠\n" +
+            "C24: 6♣\n" +
+            "C25: 7♥\n" +
+            "C26: 7♦\n" +
+            "C27: 7♠\n" +
+            "C28: 7♣\n" +
+            "C29: 8♥\n" +
+            "C30: 8♦\n" +
+            "C31: 8♠\n" +
+            "C32: 8♣\n" +
+            "C33: 9♥\n" +
+            "C34: 9♦\n" +
+            "C35: 9♠\n" +
+            "C36: 9♣\n" +
+            "C37: 10♥\n" +
+            "C38: 10♦\n" +
+            "C39: 10♠\n" +
+            "C40: 10♣\n" +
+            "C41: J♥\n" +
+            "C42: J♦\n" +
+            "C43: J♠\n" +
+            "C44: J♣\n" +
+            "C45: Q♥\n" +
+            "C46: Q♦\n" +
+            "C47: Q♠\n" +
+            "C48: Q♣\n" +
+            "C49: K♥\n" +
+            "C50: K♦\n" +
+            "C51: K♠\n" +
+            "C52: K♣");
   }
 
 
+  @Test
+  public void testOpenValidMoves() {
+    testModel3.startGame(testModel3.getDeck(), false);
+    //System.out.println(testModel3.getGameState());
+    //cascade to open
+
+    testModel3.move(PileType.CASCADE, 0, 0, PileType.OPEN, 0);
+    testModel3.move(PileType.CASCADE, 1, 0, PileType.OPEN, 1);
+    //System.out.println(testModel3.getGameState());
+
+    //open to foundation
+    testModel3.move(PileType.OPEN, 0, 0, PileType.FOUNDATION, 0);
+
+    //open to cascade
+    testModel3.move(PileType.OPEN, 1, 0, PileType.CASCADE, 7);
+
+    //System.out.println(testModel3.getGameState());
+
+    assertEquals(testModel3.getGameState(), "F1: A♥\n" +
+            "F2:\n" +
+            "F3:\n" +
+            "F4:\n" +
+            "O1:\n" +
+            "O2:\n" +
+            "O3:\n" +
+            "O4:\n" +
+            "C1:\n" +
+            "C2:\n" +
+            "C3: A♠\n" +
+            "C4: A♣\n" +
+            "C5: 2♥\n" +
+            "C6: 2♦\n" +
+            "C7: 2♠\n" +
+            "C8: 2♣, A♦\n" +
+            "C9: 3♥\n" +
+            "C10: 3♦\n" +
+            "C11: 3♠\n" +
+            "C12: 3♣\n" +
+            "C13: 4♥\n" +
+            "C14: 4♦\n" +
+            "C15: 4♠\n" +
+            "C16: 4♣\n" +
+            "C17: 5♥\n" +
+            "C18: 5♦\n" +
+            "C19: 5♠\n" +
+            "C20: 5♣\n" +
+            "C21: 6♥\n" +
+            "C22: 6♦\n" +
+            "C23: 6♠\n" +
+            "C24: 6♣\n" +
+            "C25: 7♥\n" +
+            "C26: 7♦\n" +
+            "C27: 7♠\n" +
+            "C28: 7♣\n" +
+            "C29: 8♥\n" +
+            "C30: 8♦\n" +
+            "C31: 8♠\n" +
+            "C32: 8♣\n" +
+            "C33: 9♥\n" +
+            "C34: 9♦\n" +
+            "C35: 9♠\n" +
+            "C36: 9♣\n" +
+            "C37: 10♥\n" +
+            "C38: 10♦\n" +
+            "C39: 10♠\n" +
+            "C40: 10♣\n" +
+            "C41: J♥\n" +
+            "C42: J♦\n" +
+            "C43: J♠\n" +
+            "C44: J♣\n" +
+            "C45: Q♥\n" +
+            "C46: Q♦\n" +
+            "C47: Q♠\n" +
+            "C48: Q♣\n" +
+            "C49: K♥\n" +
+            "C50: K♦\n" +
+            "C51: K♠\n" +
+            "C52: K♣");
+  }
+
+  @Test
+  public void testInvalid1() {
+    testModel3.startGame(testModel3.getDeck(), false);
+    System.out.println(testModel3.getGameState());
+
+    testModel3.move(PileType.CASCADE, 5, 0, PileType.OPEN, 2);
+    System.out.println(testModel3.getGameState());
+    testModel3.move(PileType.CASCADE, 7, 0, PileType.OPEN, 2);
+    System.out.println(testModel3.getGameState());
+    assertEquals(testModel3.isGameOver(), false);
+
+  }
   /**
    * Tests move method
    * 1) move single cascade to cascade

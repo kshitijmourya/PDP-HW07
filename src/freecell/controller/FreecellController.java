@@ -9,7 +9,12 @@ import java.util.Scanner;
 import freecell.model.FreecellOperations;
 import freecell.model.PileType;
 
-
+/**
+ * Freecell controller class which implements the given interface. It would allow to handle various
+ * models of the game.
+ *
+ * @param <K> Parameter of type K.
+ */
 public class FreecellController<K> implements IFreecellController<K> {
 
   public Readable rd;
@@ -155,7 +160,12 @@ public class FreecellController<K> implements IFreecellController<K> {
 
   }
 
-
+  /**
+   * Returns true if the string can is a Integers which could be parsed.
+   *
+   * @param s string.
+   * @return boolean answer
+   */
   private boolean isInteger(String s) {
     try {
       Integer.parseInt(s);
@@ -165,7 +175,12 @@ public class FreecellController<K> implements IFreecellController<K> {
     return true;
   }
 
-
+  /**
+   * helper function to check whether pile is valid or not.
+   *
+   * @param s string
+   * @return boolean answer.
+   */
   private boolean isPileValid(String s) {
     String letter = s.substring(0, 1);
     String index = s.substring(1);
@@ -184,6 +199,12 @@ public class FreecellController<K> implements IFreecellController<K> {
     return true;
   }
 
+  /**
+   * helper function to check whether index is valid or not.
+   *
+   * @param c string c.
+   * @return boolean answer
+   */
   private boolean isCardIndexValid(String c) {
     try {
       return Integer.parseInt(c) >= 1;
@@ -194,25 +215,40 @@ public class FreecellController<K> implements IFreecellController<K> {
     }
   }
 
-
+  /**
+   * helper function which returns the piletype from the string. It substrings the first part of the
+   * string and checks with various cases.
+   *
+   * @param c string c.
+   * @return piletype.
+   */
   private PileType getPileType(String c) {
     String letter = c.substring(0, 1);
     PileType pile = null;
 
-    if (letter.equals("C")) {
-      pile = PileType.CASCADE;
-    }
-    if (letter.equals("F")) {
-      pile = PileType.FOUNDATION;
-    }
-    if (letter.equals("O")) {
-      pile = PileType.OPEN;
-    } else {
-      appendHelper("\n" + "Please enter valid pile type. Try again.");
+    switch (letter) {
+      case "C":
+        pile = PileType.CASCADE;
+        break;
+      case "F":
+        pile = PileType.FOUNDATION;
+        break;
+      case "O":
+        pile = PileType.OPEN;
+        break;
+      default:
+        throw new IllegalArgumentException();
     }
     return pile;
+
   }
 
+  /**
+   * helper function which gets the index from the string.
+   *
+   * @param c string.
+   * @return index in int form.
+   */
   private int getIndex(String c) {
     String index;
     int result;
