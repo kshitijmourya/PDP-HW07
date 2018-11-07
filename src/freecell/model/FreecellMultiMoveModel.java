@@ -72,9 +72,11 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
       }
 
-      //int cardLimit = (numberOpen + 1) + numberCascade * numberOpen;
-      int cardLimit = (numberOpen + 1) * (int) Math.pow(2, numberCascade);
+      int cardLimit = (numberOpen + 1) + numberCascade * numberOpen;
+      //int cardLimit = (numberOpen + 1) * (int) Math.pow(2, numberCascade);
       if (cardValue > cardLimit) {
+        System.out.println(cardLimit);
+        System.out.println("here");
         shifting_cards = new LinkedList<Cards>();
       } else {
 
@@ -92,7 +94,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
           throw new IndexOutOfBoundsException(shifting_cards.toString());
         }
         //CardColor checkColor = shifting_cards.get(0).getColor();
-
+        System.out.println(shifting_cards);
         if (shifting_cards.size() > 0) {
           CardColor checkColor = shifting_cards.get(0).getColor();
           int checkValue = value_table.get(shifting_cards.get(0).getValue());

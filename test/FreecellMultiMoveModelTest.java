@@ -220,7 +220,8 @@ public class FreecellMultiMoveModelTest {
 
      testModelMultiMove.move(PileType.CASCADE, 7, 6, PileType.CASCADE, 6);
     testModelMultiMove.move(PileType.CASCADE, 7, 4, PileType.OPEN, 7);
-    testModelMultiMove.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
+    testModelMultiMove.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1
+     );
     //System.out.println(testModelMultiMove.getGameState());
 
     testModelMultiMove.move(PileType.FOUNDATION, 0, 1, PileType.OPEN, 0);
@@ -355,6 +356,7 @@ public class FreecellMultiMoveModelTest {
     testModel3.move(PileType.CASCADE, 28, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 29, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 30, 0, PileType.FOUNDATION, 2);
+    System.out.println(testModel3.getGameState());
     testModel3.move(PileType.CASCADE, 31, 0, PileType.FOUNDATION, 3);
 
     testModel3.move(PileType.CASCADE, 32, 0, PileType.FOUNDATION, 0);
