@@ -214,6 +214,8 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
       removeCard(source, pileNumber);
     } else {
       throw new IllegalArgumentException("Invalid Move");
+
+
     }
   }
 
