@@ -30,7 +30,7 @@ public class Cards implements CardDeck {
    * @param color color of card.
    * @param suite type of suite cards belongs to.
    */
-  private Cards(String value, CardColor color, String suite) {
+  Cards(String value, CardColor color, String suite) {
     this.suite = suite;
     this.value = value;
     this.color = color;
