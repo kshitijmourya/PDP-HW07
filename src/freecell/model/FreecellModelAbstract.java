@@ -243,17 +243,19 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
    * @param pileNumber pile number of source.
    */
   public void removeCard(PileType source, int pileNumber) {
-    if (source.equals(PileType.FOUNDATION)) {
-      this.foundationPiles.getPiles().get(pileNumber).pollLast();
-    }
+    try {
+      if (source.equals(PileType.FOUNDATION)) {
+        this.foundationPiles.getPiles().get(pileNumber).pollLast();
+      }
 
-    if (source.equals(PileType.OPEN)) {
-      this.openPiles.getPiles().get(pileNumber).pollLast();
-    }
+      if (source.equals(PileType.OPEN)) {
+        this.openPiles.getPiles().get(pileNumber).pollLast();
+      }
 
-    if (source.equals(PileType.CASCADE)) {
-      this.cascadePiles.getPiles().get(pileNumber).pollLast();
-    }
+      if (source.equals(PileType.CASCADE)) {
+        this.cascadePiles.getPiles().get(pileNumber).pollLast();
+      }
+    }catch (IndexOutOfBoundsException e) {throw new IndexOutOfBoundsException("here is error");}
   }
 
   /**
