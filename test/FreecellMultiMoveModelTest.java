@@ -199,6 +199,10 @@ public class FreecellMultiMoveModelTest {
 
     testModelMultiMove.move(PileType.CASCADE, 0, 6, PileType.CASCADE, 1);
     System.out.println(testModelMultiMove.getGameState());
+    testModelMultiMove.move(PileType.CASCADE, 7, 1, PileType.OPEN, 7);
+    System.out.println(testModelMultiMove.getGameState());
+    testModelMultiMove.move(PileType.CASCADE, 7, 1, PileType.OPEN, 5);
+    System.out.println(testModelMultiMove.getGameState());
 
     /**
 

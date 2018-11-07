@@ -76,26 +76,33 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
       if (cardValue > cardLimit) {
         shifting_cards = new LinkedList<Cards>();
       } else {
-
         int start = pilesInput.get(pileNumber).size() - 1;
-        for (int i = start ; i > start - cardValue; i--) {
+        for (int i = start; i > start - cardValue; i--) {
           shifting_cards.addLast(pilesInput.get(pileNumber).get(i));
         }
 
 
         // check if card colors alternate, and if cards are ordered in same number
         // if they are then keep list as is, else make list empty.
-        CardColor checkColor = shifting_cards.get(0).getColor();
-        int checkValue = value_table.get(shifting_cards.get(0).getValue());
+        try {
+        } catch (IndexOutOfBoundsException e) {
+          throw new IndexOutOfBoundsException(shifting_cards.toString());
+        }
+          //CardColor checkColor = shifting_cards.get(0).getColor();
 
-        for (Cards c : shifting_cards) {
-          if (shifting_cards.indexOf(c) == 0) {
-            //empty block
-          } else if (c.getColor() == checkColor) {
+        if (shifting_cards.size() > 0) {
+          CardColor checkColor = shifting_cards.get(0).getColor();
+
+          int checkValue = value_table.get(shifting_cards.get(0).getValue());
+
+          for (Cards c : shifting_cards) {
+            if (shifting_cards.indexOf(c) == 0) {
+              //empty block
+            } else if (c.getColor() == checkColor) {
               shifting_cards = new LinkedList<Cards>();
               break;
             } else if (value_table.get(c.getValue()) - checkValue != 1) {
-            System.out.println(c.getValue());
+              System.out.println(c.getValue());
               shifting_cards = new LinkedList<Cards>();
               break;
             } else {
@@ -105,6 +112,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
           }
         }
       }
+    }
     return shifting_cards;
   }
 
@@ -126,12 +134,12 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
     if (this.isGameOver()) {
       throw new IllegalStateException("Game is Over");
     }
-
     if (!hasGameBegun) {
       throw new IllegalStateException("Game has not begun");
     } else {
       Cards card_shifting;
       LinkedList<Cards> multiple_cards = new LinkedList<>();
+
 
       if (source == PileType.CASCADE) {
         List<LinkedList<Cards>> test_piles = new ArrayList<>();
@@ -142,7 +150,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
 
         multiple_cards = getMultipleCardsToMove(test_piles, pileNumber, cardIndex);
-////////////////////////////////////////////////////////////////////////////////////////////////////
+
         System.out.println(multiple_cards);
         if (destination.equals(PileType.CASCADE)) {
           while (!multiple_cards.isEmpty()) {
@@ -164,7 +172,6 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
           card_shifting = multiple_cards.get(0);
           putInOpen(source, pileNumber, destPileNumber, card_shifting);
         }
-
       } else {
         card_shifting = getCardToMove(source, pileNumber, cardIndex);
 
@@ -184,8 +191,10 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
         }
       }
-    }
+
   }
+
+}
 
   /**
    * Javadoc.
@@ -203,6 +212,8 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
               .get(destPileNumber)
               .addFirst(cardShifting);
       removeCard(source, pileNumber);
+    } else {
+      throw new IllegalArgumentException("Invalid Move");
     }
   }
 
@@ -264,6 +275,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
    */
   public void putInFoundation(PileType source, int pileNumber,
                               int destPileNumber, Cards cardShifting, int shiftingCardValue) {
+
     // if pile is empty and the card being moved is an ACE, then add it to the pile.
     if (this.foundationPiles.getPiles().get(destPileNumber).isEmpty()
             && shiftingCardValue == 1) {
