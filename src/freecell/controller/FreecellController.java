@@ -2,9 +2,11 @@ package freecell.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import freecell.model.Cards;
 import freecell.model.FreecellOperations;
 import freecell.model.PileType;
 
@@ -60,10 +62,6 @@ public class FreecellController<K> implements IFreecellController<K> {
       throw new IllegalStateException("Readable or appendable objects cannot be null.");
     }
 
-    if (model.isGameOver()) {
-      appendHelper("\n" + "Game over.");
-      return;
-    }
 
     try {
       model.startGame(deck, shuffle);
@@ -78,7 +76,7 @@ public class FreecellController<K> implements IFreecellController<K> {
 
     while (scan.hasNext()) {
       String s = scan.next();
-      if (s.equals("Q") || s.equals("q")) {
+      if (s.startsWith("Q") || s.startsWith("q")) {
         appendHelper("\n" + "Game quit prematurely.");
         return;
       }
@@ -87,11 +85,13 @@ public class FreecellController<K> implements IFreecellController<K> {
 
         case 0:
           try {
-            if (isPileValid(s)) {
+            if (model.isGameOver()) {
+              appendHelper("\n" + "Game over.");
+            } else if (isPileValid(s)) {
               userInput.add(s);
             }
           } catch (IllegalArgumentException e) {
-            appendHelper("\n" + "Source pile is invalid. Try again.");
+            appendHelper("\n" + "Enter a valid source pile");
           }
           break;
 
@@ -112,7 +112,7 @@ public class FreecellController<K> implements IFreecellController<K> {
               userInput.add(s);
             }
           } catch (IllegalArgumentException e) {
-            appendHelper("\n" + "Destination pile is invalid. Try again.");
+            appendHelper("\n" + "Enter a valid destination pile:");
           }
           break;
 
@@ -125,9 +125,11 @@ public class FreecellController<K> implements IFreecellController<K> {
 
           try {
             model.move(sourcePile, sourcePileIndex - 1,
-                    cardIndex - 1, destinationPile, destinationPileIndex - 1);
-          } catch (IllegalArgumentException e) {
+                    cardIndex, destinationPile, destinationPileIndex - 1);
+          } catch (Exception e) {
             appendHelper("\n" + e.getMessage());
+            e.printStackTrace();
+            System.out.println(e);
           }
 
           appendHelper("\n" + model.getGameState());
@@ -141,6 +143,11 @@ public class FreecellController<K> implements IFreecellController<K> {
 
       }
     }
+
+    if (model.isGameOver()) {
+      appendHelper("\n" + "Game over.");
+    }
+
   }
 
 
@@ -176,7 +183,7 @@ public class FreecellController<K> implements IFreecellController<K> {
     try {
       return Integer.parseInt(c) >= 1;
     } catch (NumberFormatException e) {
-      throw new IllegalArgumentException("\n" + "Invalid card index. Try again.");
+      throw new IllegalArgumentException("\n" + "Enter a valid card index:");
     } catch (NullPointerException e) {
       throw new IllegalArgumentException("The card index cannot be null. Try again.");
     }

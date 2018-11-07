@@ -18,6 +18,7 @@ public class FreecellMultiMoveModelTest {
   private FreecellOperations testModelMultiMove;
   private FreecellOperations testModel2;
   private FreecellOperations testModel3;
+  private FreecellOperations testModel4;
   private String initialGameState = "F1:\n" +
           "F2:\n" +
           "F3:\n" +
@@ -56,7 +57,18 @@ public class FreecellMultiMoveModelTest {
             .opens(2)
             .build();
 
-    testModel3 = FreecellMultiMoveModel.getBuilder().cascades(52).opens(4).build();
+    testModel3 = FreecellMultiMoveModel
+            .getBuilder()
+            .cascades(52)
+            .opens(4)
+            .build();
+
+    testModel4=FreecellMultiMoveModel
+            .getBuilder()
+            .cascades(4)
+            .opens(1)
+            .build();
+
   }
 
   @Test
@@ -197,7 +209,7 @@ public class FreecellMultiMoveModelTest {
 
     testModelMultiMove.move(PileType.CASCADE, 1, 6, PileType.CASCADE, 0);
 
-   // testModelMultiMove.move(PileType.CASCADE, 1, 1, PileType.FOUNDATION, 3);
+    // testModelMultiMove.move(PileType.CASCADE, 1, 1, PileType.FOUNDATION, 3);
 
     System.out.println(testModelMultiMove.getGameState());
 
@@ -234,36 +246,38 @@ public class FreecellMultiMoveModelTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testMove() {
-    testModel3.startGame(testModel3.getDeck(), false);
+    testModelMultiMove.startGame(testModelMultiMove.getDeck(), false);
+
     //Valid moves
     //cascade to open
 
-    testModel3.move(PileType.CASCADE, 0, 0, PileType.OPEN, 0);
+    //System.out.println(testModelMultiMove.getGameState());
+    testModelMultiMove.move(PileType.CASCADE, 0, 13, PileType.OPEN, 0);
     //cascade to foundation
-    testModel3.move(PileType.CASCADE, 1, 0, PileType.FOUNDATION, 1);
+    testModelMultiMove.move(PileType.CASCADE, 1, 13, PileType.OPEN, 1);
     //cascade to cascade
-    testModel3.move(PileType.CASCADE, 2, 0, PileType.CASCADE, 5);
+    testModelMultiMove.move(PileType.CASCADE, 2, 13, PileType.OPEN, 5);
 
     //Invalid moves
-
+    System.out.println(testModelMultiMove.getGameState());
     //cascade to open--pile is not empty
-    System.out.println(testModel3.getGameState());
-    testModel3.move(PileType.CASCADE, 6, 2, PileType.OPEN, 0);
-    testModel3.move(PileType.CASCADE, 7, 2, PileType.OPEN, 0);
-    fail();
+
+    //testModel3.move(PileType.CASCADE, 6, 2, PileType.OPEN, 0);
+    //testModel3.move(PileType.CASCADE, 7, 2, PileType.OPEN, 0);
+    //fail();
     //cascade to foundation-- invalid move works both on empty and with card
-    testModel3.move(PileType.CASCADE, 6, 2, PileType.FOUNDATION, 1);
-    fail();
+    //testModel3.move(PileType.CASCADE, 6, 2, PileType.FOUNDATION, 1);
+    //fail();
     //cascade to cascade
-    testModel3.move(PileType.CASCADE, 0, 1, PileType.CASCADE, 4);
-    fail();
+    //testModel3.move(PileType.CASCADE, 0, 1, PileType.CASCADE, 4);
+    //fail();
 
 
     //Foundation to open
-    testModel3.move(PileType.FOUNDATION, 1, 0, PileType.OPEN, 2);
+    //testModel3.move(PileType.FOUNDATION, 1, 0, PileType.OPEN, 2);
     //Foundation to cascade
-    testModel3.move(PileType.FOUNDATION, 1, 0, PileType.CASCADE, 0);
-    fail();
+    //testModel3.move(PileType.FOUNDATION, 1, 0, PileType.CASCADE, 0);
+    //fail();
   }
 
 
@@ -341,5 +355,56 @@ public class FreecellMultiMoveModelTest {
 
     assertEquals(testModel3.isGameOver(), true);
 
+
   }
+
+
+  @Test
+  public void test(){
+    testModel4.startGame(testModel4.getDeck(),false);
+    System.out.println(testModel4.getGameState());
+
+    testModel4.move(PileType.CASCADE,0,13,PileType.OPEN,0);
+    testModel4.move(PileType.CASCADE,0,12,PileType.CASCADE,2);
+
+    System.out.println(testModel4.getGameState());
+
+  }
+
+  /**
+   * Tests move method
+   * 1) move single cascade to cascade
+   * 2) move single cascade to open
+   * 3) move single cascade to foundation
+   * 4) move multiple cascade to cascade
+   * 5) invalid cascade source build
+   * 6) invalid cascade destination build
+   * 7) open pile not free
+   * 8) foundation pile incorrect build
+   * 9) move to non empty cascade
+   * 10) move to empty cascade
+   * 11) move multiple to open fail
+   *
+   * IsGameOver
+   * 1) yes
+   * 2) no
+   *
+   *
+   * Gamestate
+   * 1) before start game
+   * 2) after start game
+   * 3) after any exception
+   * 4) after moves
+   *
+   *
+   * Tests
+   * 1) invalid deck
+   * 2) cascadepiles<4 open pile<1
+   * 3)move before gamestart
+   * 4) test shuffle
+   * 5)
+   */
+
+
+
 }

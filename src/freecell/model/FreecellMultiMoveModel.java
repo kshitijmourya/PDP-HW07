@@ -47,11 +47,11 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
    *
    * @param pilesInput pilesinput
    * @param pileNumber pilenumber
-   * @param cardValue  cardvalue
+   * @param cardIndex  cardindex
    * @return cards.
    */
   public LinkedList<Cards> getMultipleCardsToMove(List<LinkedList<Cards>> pilesInput,
-                                                  int pileNumber, int cardValue) {
+                                                  int pileNumber, int cardIndex) {
     LinkedList<Cards> shifting_cards = new LinkedList<Cards>();
     int shifting_card_value = 0;
     int count = 0;
@@ -65,7 +65,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         // get value of card in chosen pile
         shifting_card_value = value_table.get(c.getValue());
         // if value of card matches the value wanted.
-        if (shifting_card_value == cardValue) {
+        if (shifting_card_value == cardIndex) {
           break;
         }
 
@@ -91,14 +91,20 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
             numberCascade++;
           }
         }
-        int k = (int) Math.pow(2,numberCascade);
-        int cardLimit = (numberOpen + 1) + numberCascade * numberOpen;
-        System.out.println(numberOpen);
-        System.out.println(numberCascade);
-        System.out.println(k);
-        System.out.println(cardLimit);
+        int k = (int) Math.pow(2, numberCascade);
+        //int cardLimit = (numberOpen + 1) + numberCascade * numberOpen;
+
+        int cardLimit = (numberOpen + 1) * (int) Math.pow(2, numberCascade);
+        //int cardLimit = numberCascade + numberOpen + 2;
+        //System.out.println(numberOpen);
+        //System.out.println(numberCascade);
+        //System.out.println(k);
+        //System.out.println(cardLimit);
         if (shifting_cards.size() > cardLimit) {
+          //int i = shifting_cards.size();
+          // String st = "i= " + i + " cardlimit=" + cardLimit + "open= " + numberOpen + "cascade " + numberCascade;
           shifting_cards = new LinkedList<Cards>();
+
         } else {
           // check if card colors alternate, and if cards are ordered in same number
           // if they are then keep list as is, else make list empty.
@@ -146,7 +152,10 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
 
     if (!hasGameBegun) {
       throw new IllegalStateException("Game has not begun");
-    } else {
+    }
+
+    else {
+
       Cards card_shifting;
       LinkedList<Cards> multiple_cards = new LinkedList<>();
       int immediate_cascade_value = 0;
@@ -154,7 +163,9 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
       try {
         immediate_cascade_value =
                 value_table.get(this.cascadePiles.getPiles().get(pileNumber).peekLast().getValue());
-      } catch (NullPointerException e){}
+      } catch (NullPointerException e) {
+        //empty
+      }
 
       if (source == PileType.CASCADE && immediate_cascade_value != cardIndex) {
         List<LinkedList<Cards>> test_piles = new ArrayList<>();
@@ -177,7 +188,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
 
         if (destination.equals(PileType.OPEN) && multiple_cards.size() == 1) {
-          
+
           card_shifting = multiple_cards.get(0);
           putInOpen(source, pileNumber, destPileNumber, card_shifting);
         }
@@ -186,19 +197,19 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         card_shifting = getCardToMove(source, pileNumber, cardIndex);
 
         if (!card_shifting.getValue().equals("none")) {
-        int shifting_card_value = value_table.get(card_shifting.getValue());
-        // if destination is open pile, make sure it is empty.
-        if (destination.equals(PileType.OPEN)) {
-          putInOpen(source, pileNumber, destPileNumber, card_shifting);
-        }
+          int shifting_card_value = value_table.get(card_shifting.getValue());
+          // if destination is open pile, make sure it is empty.
+          if (destination.equals(PileType.OPEN)) {
+            putInOpen(source, pileNumber, destPileNumber, card_shifting);
+          }
 
-        if (destination.equals(PileType.FOUNDATION)) {
-          putInFoundation(source, pileNumber, destPileNumber, card_shifting, shifting_card_value);
-        }
+          if (destination.equals(PileType.FOUNDATION)) {
+            putInFoundation(source, pileNumber, destPileNumber, card_shifting, shifting_card_value);
+          }
 
-        if (destination.equals(PileType.CASCADE)) {
-          putInCascade(source, pileNumber, destPileNumber, card_shifting, shifting_card_value);
-        }
+          if (destination.equals(PileType.CASCADE)) {
+            putInCascade(source, pileNumber, destPileNumber, card_shifting, shifting_card_value);
+          }
         }
       }
     }
@@ -309,4 +320,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
     //throw new IllegalArgumentException("Invalid Move");
     //}
   }
+
+
+
 }

@@ -89,7 +89,8 @@ public class TestMain {
 
     //System.out.println(model.getGameState());
 
-   /* model.move(PileType.CASCADE,0,13,PileType.OPEN,0);
+   /*
+    model.move(PileType.CASCADE,0,13,PileType.OPEN,0);
     model.move(PileType.CASCADE,1,13,PileType.OPEN,1);
     model.move(PileType.CASCADE,2,13,PileType.OPEN,2);
     model.move(PileType.CASCADE,3,13,PileType.OPEN,3);

@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.io.StringReader;
 
 import freecell.controller.FreecellController;
+
 import freecell.model.FreecellModel;
 import freecell.model.FreecellOperations;
 
@@ -47,8 +48,10 @@ public class FreecellControllerTest {
     Reader in = new StringReader("");
 
     FreecellController controller = new FreecellController(in, out);
-    controller.playGame(testModel2.getDeck(),testModel2,false);
+    controller.playGame(testModel2.getDeck(), testModel2, false);
     System.out.println(testModel2.getDeck());
-    assertEquals(initialGameState,out.toString());
+    assertEquals(initialGameState, out.toString());
   }
+
+
 }
