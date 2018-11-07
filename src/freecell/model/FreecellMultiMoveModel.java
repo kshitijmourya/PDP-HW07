@@ -77,12 +77,14 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
       if (cardValue > cardLimit) {
         shifting_cards = new LinkedList<Cards>();
       } else {
+
         int start = pilesInput.get(pileNumber).size() - 1;
-        for (int i = start; i > start - cardValue; i--) {
+        for (int i = start; i >= start - cardValue; i--) {
           shifting_cards.addLast(pilesInput.get(pileNumber).get(i));
         }
-
-
+        System.out.println(start);
+        System.out.println(cardValue);
+        System.out.println(pilesInput.get(pileNumber).get(start-cardValue));
         // check if card colors alternate, and if cards are ordered in same number
         // if they are then keep list as is, else make list empty.
         try {
@@ -93,7 +95,6 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
 
         if (shifting_cards.size() > 0) {
           CardColor checkColor = shifting_cards.get(0).getColor();
-
           int checkValue = value_table.get(shifting_cards.get(0).getValue());
 
           for (Cards c : shifting_cards) {
@@ -152,6 +153,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
 
         multiple_cards = getMultipleCardsToMove(test_piles, pileNumber, cardIndex);
+        //System.out.println(multiple_cards);
 
         //System.out.println(multiple_cards);
         if (destination.equals(PileType.CASCADE)) {
@@ -170,17 +172,19 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         }
 
         if (destination.equals(PileType.OPEN) && multiple_cards.size() == 1) {
-
+          System.out.println("here");
           card_shifting = multiple_cards.get(0);
           putInOpen(source, pileNumber, destPileNumber, card_shifting);
         }
       } else {
+
         card_shifting = getCardToMove(source, pileNumber, cardIndex);
 
         if (!card_shifting.getValue().equals("none")) {
           int shifting_card_value = value_table.get(card_shifting.getValue());
           // if destination is open pile, make sure it is empty.
           if (destination.equals(PileType.OPEN)) {
+            System.out.println("here");
             putInOpen(source, pileNumber, destPileNumber, card_shifting);
           }
 
