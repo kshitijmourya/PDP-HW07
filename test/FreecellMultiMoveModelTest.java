@@ -19,6 +19,7 @@ public class FreecellMultiMoveModelTest {
   private FreecellOperations testModel2;
   private FreecellOperations testModel3;
   private FreecellOperations testModel4;
+  private FreecellOperations testModel5;
   private String initialGameState = "F1:\n" +
           "F2:\n" +
           "F3:\n" +
@@ -65,10 +66,14 @@ public class FreecellMultiMoveModelTest {
 
     testModel4=FreecellMultiMoveModel
             .getBuilder()
-            .cascades(4)
+            .cascades(10)
             .opens(1)
             .build();
 
+    testModel5=FreecellMultiMoveModel
+            .getBuilder()
+            .cascades(6)
+            .build();
   }
 
   @Test
@@ -213,7 +218,7 @@ public class FreecellMultiMoveModelTest {
     System.out.println(testModelMultiMove.getGameState());
     testModelMultiMove.move(PileType.CASCADE, 7, 0, PileType.OPEN, 7);
     System.out.println(testModelMultiMove.getGameState());
-    testModelMultiMove.move(PileType.CASCADE, 7, 0, PileType.OPEN, 5);
+//    testModelMultiMove.move(PileType.CASCADE, 7, 0, PileType.OPEN, 5);
     System.out.println(testModelMultiMove.getGameState());
 
     /**
@@ -394,15 +399,25 @@ public class FreecellMultiMoveModelTest {
 
   @Test
   public void test1(){
-    testModel3.startGame(testModel3.getDeck(),false);
-    //System.out.println(testModel3.getGameState());
+    testModel4.startGame(testModel4.getDeck(),false);
+    System.out.println(testModel4.getGameState());
 
+    //cascade to cascade
+    testModel4.move(PileType.CASCADE,4,0,PileType.CASCADE,0);
+    testModel4.move(PileType.CASCADE,2,0,PileType.CASCADE,0);
+    testModel4.move(PileType.CASCADE,0,1,PileType.CASCADE,1);
+    testModel4.move(PileType.CASCADE,6,0,PileType.CASCADE,8);
+    testModel4.move(PileType.CASCADE,6,0,PileType.CASCADE,1);
+    //testModel4.move(PileType.CASCADE,1,2,PileType.CASCADE,0);
 
-    testModel3.move(PileType.CASCADE,0,0,PileType.OPEN,0);
-    testModel3.move(PileType.CASCADE,2,0,PileType.OPEN,0);
-    System.out.println(testModel3.getGameState());
+    System.out.println(testModel4.getGameState());
+
 
   }
+
+
+
+
 
   /**
    * Tests move method

@@ -47,7 +47,7 @@ public final class MockModel implements FreecellOperations {
   @Override
   public boolean isGameOver() {
 
-    return false;
+    return true;
   }
 
   @Override

@@ -2,11 +2,10 @@ package freecell.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import freecell.model.Cards;
+
 import freecell.model.FreecellOperations;
 import freecell.model.PileType;
 
@@ -17,7 +16,7 @@ public class FreecellController<K> implements IFreecellController<K> {
   public Appendable ap;
 
   /**
-   * Constructor.
+   * Constructor for the controller.
    *
    * @param rd readable object.
    * @param ap appendable object.
@@ -73,6 +72,9 @@ public class FreecellController<K> implements IFreecellController<K> {
     appendHelper(model.getGameState());
     Scanner scan = new Scanner(this.rd);
     ArrayList<String> userInput = new ArrayList<String>();
+    if (model.isGameOver()) {
+      appendHelper("\n" + "Game over.");
+    }
 
     while (scan.hasNext()) {
       String s = scan.next();
@@ -125,7 +127,7 @@ public class FreecellController<K> implements IFreecellController<K> {
 
           try {
             model.move(sourcePile, sourcePileIndex - 1,
-                    cardIndex, destinationPile, destinationPileIndex - 1);
+                    cardIndex - 1, destinationPile, destinationPileIndex - 1);
           } catch (Exception e) {
             appendHelper("\n" + e.getMessage());
             e.printStackTrace();
