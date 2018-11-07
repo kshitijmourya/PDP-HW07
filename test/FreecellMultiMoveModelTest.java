@@ -316,61 +316,64 @@ public class FreecellMultiMoveModelTest {
     //System.out.println(testModel3.getGameState());
     testModel3.startGame(testModel3.getDeck(), false);
 
+    System.out.print(testModel3.getGameState());
+    testModel3.move(PileType.CASCADE, 0, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 1, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 2, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 3, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 4, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 5, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 6, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 7, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 8, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 9, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 10, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 11, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 12, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 13, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 14, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 15, 0, PileType.FOUNDATION, 3);
 
-    testModel3.move(PileType.CASCADE, 0, 1, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 1, 1, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 2, 1, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 3, 1, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 4, 2, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 5, 2, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 6, 2, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 7, 2, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 8, 3, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 9, 3, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 10, 3, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 11, 3, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 12, 4, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 13, 4, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 14, 4, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 15, 4, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 16, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 17, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 18, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 19, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 20, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 21, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 22, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 23, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 24, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 25, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 26, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 27, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 28, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 29, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 30, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 31, 0, PileType.FOUNDATION, 3);
 
-    testModel3.move(PileType.CASCADE, 16, 5, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 17, 5, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 18, 5, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 19, 5, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 20, 6, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 21, 6, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 22, 6, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 23, 6, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 24, 7, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 25, 7, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 26, 7, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 27, 7, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 28, 8, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 29, 8, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 30, 8, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 31, 8, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 32, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 33, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 34, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 35, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 36, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 37, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 38, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 39, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 40, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 41, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 42, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 43, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 44, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 45, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 46, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 47, 0, PileType.FOUNDATION, 3);
+    testModel3.move(PileType.CASCADE, 48, 0, PileType.FOUNDATION, 0);
+    testModel3.move(PileType.CASCADE, 49, 0, PileType.FOUNDATION, 1);
+    testModel3.move(PileType.CASCADE, 50, 0, PileType.FOUNDATION, 2);
+    testModel3.move(PileType.CASCADE, 51, 0, PileType.FOUNDATION, 3);
 
-    testModel3.move(PileType.CASCADE, 32, 9, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 33, 9, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 34, 9, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 35, 9, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 36, 10, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 37, 10, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 38, 10, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 39, 10, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 40, 11, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 41, 11, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 42, 11, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 43, 11, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 44, 12, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 45, 12, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 46, 12, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 47, 12, PileType.FOUNDATION, 3);
-    testModel3.move(PileType.CASCADE, 48, 13, PileType.FOUNDATION, 0);
-    testModel3.move(PileType.CASCADE, 49, 13, PileType.FOUNDATION, 1);
-    testModel3.move(PileType.CASCADE, 50, 13, PileType.FOUNDATION, 2);
-    testModel3.move(PileType.CASCADE, 51, 13, PileType.FOUNDATION, 3);
+    System.out.println(testModel3.getGameState());
+
 
 
     assertEquals(testModel3.isGameOver(), true);
@@ -381,13 +384,13 @@ public class FreecellMultiMoveModelTest {
 
   @Test
   public void test(){
-    testModel4.startGame(testModel4.getDeck(),false);
-    System.out.println(testModel4.getGameState());
+    testModel3.startGame(testModel3.getDeck(),false);
+    //System.out.println(testModel3.getGameState());
 
-    testModel4.move(PileType.CASCADE,0,13,PileType.OPEN,0);
-    testModel4.move(PileType.CASCADE,0,12,PileType.CASCADE,2);
 
-    System.out.println(testModel4.getGameState());
+    testModel3.move(PileType.CASCADE,0,0,PileType.CASCADE,8);
+
+    System.out.println(testModel3.getGameState());
 
   }
 
