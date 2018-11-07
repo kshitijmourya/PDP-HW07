@@ -37,10 +37,12 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
   };
 
   /**
-   * Javadoc.
+   * Constructor that will act as super() for all children of this abstract class. This constructor
+   * cannot be instantiated because it is abstract. It's sole purpose is to act as super() for its
+   * children.
    *
-   * @param cascades cascades
-   * @param opens    opens
+   * @param cascades cascade piles.
+   * @param opens    open piles.
    */
   public FreecellModelAbstract(int cascades, int opens) throws IllegalArgumentException {
     this.deck_of_cards = new Cards();
@@ -199,7 +201,8 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
   }
 
   /**
-   * Placeholder javadoc.
+   * Get a copy of the card that is to be moved. If the card to be moved is not valid, then a
+   * dummy card will be returned in its place.
    *
    * @param source     source
    * @param pileNumber pilenumber
@@ -235,7 +238,7 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
   }
 
   /**
-   * method to removeCard.
+   * Helper method to remove a card from the source pile of a move once the move has been completed.
    *
    * @param source     piletype of source.
    * @param pileNumber pile number of source.
@@ -301,7 +304,8 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
   }
 
   /**
-   * Signal if the game is over or not.
+   * Signal if the game is over or not. The game is over when the foundation piles are full and the
+   * cascade/open piles are completely empty.
    *
    * @return true if game is over, false otherwise
    */

@@ -4,20 +4,38 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Class that represents a model for a game of freecell that allows the player to move
+ * multiple cards at once.
+ */
 public class FreecellMultiMoveModel extends FreecellModelAbstract {
 
   public static FreecellMultiMoveModelBuilder getBuilder() {
     return new FreecellMultiMoveModelBuilder();
   }
 
+  /**
+   * Constructor for the freecell model that allows multiple moves.
+   *
+   * @param cascades number of cascade piles.
+   * @param opens number of open piles.
+   * @throws IllegalArgumentException if the piles fall below the minimum threshhold.
+   */
   private FreecellMultiMoveModel(int cascades, int opens) throws IllegalArgumentException {
     super(cascades, opens);
   }
 
+  /**
+   * Inner class for the builder that helps build the constructor for the freecell model that
+   * allows multiple moves.
+   */
   public static class FreecellMultiMoveModelBuilder implements FreecellOperationsBuilder {
     private int opensPiles;
     private int cascadesPiles;
 
+    /**
+     * Setting the default values for the multiple move freecell model builder.
+     */
     private FreecellMultiMoveModelBuilder() {
       opensPiles = 4;
       cascadesPiles = 8;
@@ -43,13 +61,13 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
   }
 
   /**
-   * method which gets multiple cards to move. it checks all the conditions required to move
-   * multiple cards.
+   * Method which gets multiple cards to be moved as a list. It checks if the cards in the list
+   * alternate in color and have the correct value order.
    *
-   * @param pilesInput pilesinput
-   * @param pileNumber pilenumber
-   * @param cardValue  cardvalue
-   * @return cards.
+   * @param pilesInput copy of piles in pile source type.
+   * @param pileNumber the pile index number.
+   * @param cardValue  the index of the highest valued card in the cascade to be moved.
+   * @return list of cards to be moved.
    */
   public LinkedList<Cards> getMultipleCardsToMove(List<LinkedList<Cards>> pilesInput,
                                                   int pileNumber, int cardValue) {
@@ -123,6 +141,8 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
 
   /**
    * Move a card from the given source pile to the given destination pile, if the move is valid.
+   * Does so by using helper functions to obtain copies of the card/cards to be moved. And helper
+   * functions to apply the move and remove the card/cards from the source, only if valid.
    *
    * @param source         the type of the source pile see @link{PileType}
    * @param pileNumber     the pile number of the given type, starting at 0
@@ -246,12 +266,14 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
   }
 
   /**
-   * Javadoc.
+   * Helper method that will take in the card to be placed into an open pile. If the pile is empty,
+   * it will place the card and then remove it from the source. If the pile is not empty it will
+   * not place the card at the destination and not remove the card from the source.
    *
-   * @param source         source
-   * @param pileNumber     pileNumber
-   * @param destPileNumber destPileNumber
-   * @param cardShifting   cardShifting.
+   * @param source         source pile type.
+   * @param pileNumber     pile index number.
+   * @param destPileNumber index number for the destination pile.
+   * @param cardShifting   copy of card that is shifting.
    */
   public void putInOpen(PileType source, int pileNumber,
                         int destPileNumber, Cards cardShifting) {
@@ -265,12 +287,15 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
   }
 
   /**
-   * Placeholder javadoc.
+   * Helper method that will take in the card to be placed into a cascade pile. If the pile is empty,
+   * it will place the card and then remove it from the source. If the pile is not empty it will
+   * check if the card can be moved legally at the destination, then place it in the destination and
+   * remove the card from the source if legal.
    *
-   * @param source            source
-   * @param pileNumber        pilenumber
-   * @param destPileNumber    destination pile number
-   * @param cardShifting      card shifting.
+   * @param source         source pile type.
+   * @param pileNumber     pile index number.
+   * @param destPileNumber index number for the destination pile.
+   * @param cardShifting   copy of card that is shifting.
    * @param shiftingCardValue shifting card value.
    */
   public void putInCascade(PileType source, int pileNumber,
@@ -312,12 +337,15 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
   }
 
   /**
-   * Javadoc.
+   * Helper method that will take in the card to be placed into a foundation pile. If the pile is empty,
+   * it will place the card and then remove it from the source. If the pile is not empty it will
+   * check if the card can be moved legally at the destination, then place it in the destination and
+   * remove the card from the source if legal.
    *
-   * @param source            source
-   * @param pileNumber        pilenumber
-   * @param destPileNumber    destinationpilenumber.
-   * @param cardShifting      cardshifting.
+   * @param source         source pile type.
+   * @param pileNumber     pile index number.
+   * @param destPileNumber index number for the destination pile.
+   * @param cardShifting   copy of card that is shifting.
    * @param shiftingCardValue shifting card value.
    */
   public void putInFoundation(PileType source, int pileNumber,
