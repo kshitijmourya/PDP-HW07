@@ -316,19 +316,22 @@ public class FreecellMultiMoveModelTest {
     //System.out.println(testModel3.getGameState());
     testModel3.startGame(testModel3.getDeck(), false);
 
-    System.out.print(testModel3.getGameState());
+    //System.out.print(testModel3.getGameState());
     testModel3.move(PileType.CASCADE, 0, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 1, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 2, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 3, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 4, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 5, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 6, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 7, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 8, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 9, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 10, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 11, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 12, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 13, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 14, 0, PileType.FOUNDATION, 2);
@@ -338,14 +341,17 @@ public class FreecellMultiMoveModelTest {
     testModel3.move(PileType.CASCADE, 17, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 18, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 19, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 20, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 21, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 22, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 23, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 24, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 25, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 26, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 27, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 28, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 29, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 30, 0, PileType.FOUNDATION, 2);
@@ -355,18 +361,22 @@ public class FreecellMultiMoveModelTest {
     testModel3.move(PileType.CASCADE, 33, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 34, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 35, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 36, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 37, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 38, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 39, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 40, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 41, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 42, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 43, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 44, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 45, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 46, 0, PileType.FOUNDATION, 2);
     testModel3.move(PileType.CASCADE, 47, 0, PileType.FOUNDATION, 3);
+
     testModel3.move(PileType.CASCADE, 48, 0, PileType.FOUNDATION, 0);
     testModel3.move(PileType.CASCADE, 49, 0, PileType.FOUNDATION, 1);
     testModel3.move(PileType.CASCADE, 50, 0, PileType.FOUNDATION, 2);
@@ -383,14 +393,13 @@ public class FreecellMultiMoveModelTest {
 
 
   @Test
-  public void test(){
+  public void test1(){
     testModel3.startGame(testModel3.getDeck(),false);
     //System.out.println(testModel3.getGameState());
 
 
-    testModel3.move(PileType.CASCADE,0,0,PileType.CASCADE,8);
-    testModel3.move(PileType.CASCADE,1,0,PileType.OPEN,3);
-
+    testModel3.move(PileType.CASCADE,0,0,PileType.OPEN,0);
+    testModel3.move(PileType.CASCADE,2,0,PileType.OPEN,0);
     System.out.println(testModel3.getGameState());
 
   }

@@ -82,9 +82,9 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         for (int i = start; i >= start - cardValue; i--) {
           shifting_cards.addLast(pilesInput.get(pileNumber).get(i));
         }
-        System.out.println(start);
-        System.out.println(cardValue);
-        System.out.println(pilesInput.get(pileNumber).get(start-cardValue));
+        //System.out.println(start);
+        //System.out.println(cardValue);
+        //System.out.println(pilesInput.get(pileNumber).get(start - cardValue));
         // check if card colors alternate, and if cards are ordered in same number
         // if they are then keep list as is, else make list empty.
         try {
@@ -133,6 +133,23 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
   public void move(PileType source, int pileNumber, int cardIndex,
                    PileType destination, int destPileNumber)
           throws IllegalArgumentException, IllegalStateException {
+    int numberOpen = 0;
+    int numberCascade = 0;
+    for (LinkedList<Cards> p : this.openPiles.getPiles()) {
+      if (p.size() == 0) {
+        numberOpen++;
+      }
+    }
+    for (LinkedList<Cards> c : this.cascadePiles.getPiles()) {
+      if (c.size() == 0) {
+        numberCascade++;
+      }
+    }
+
+    //int cardLimit = (numberOpen + 1) + numberCascade * numberOpen;
+    int cardLimit = (numberOpen + 1) * (int) Math.pow(2, numberCascade);
+
+
     if (this.isGameOver()) {
       throw new IllegalStateException("Game is Over");
     }
@@ -147,8 +164,8 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         List<LinkedList<Cards>> test_piles = new ArrayList<>();
         test_piles.addAll(this.cascadePiles.getPiles());
 
-        if (cardIndex > this.cascadePiles.getPiles().get(pileNumber).size()-1) {
 
+        if (cardIndex > this.cascadePiles.getPiles().get(pileNumber).size()) {
           throw new IllegalArgumentException("Invalid Card Index");
         }
 
@@ -159,7 +176,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
         if (destination.equals(PileType.CASCADE)) {
           while (!multiple_cards.isEmpty()) {
             card_shifting = multiple_cards.pollLast();
-           // System.out.println(card_shifting);
+            // System.out.println(card_shifting);
             putInCascade(source, pileNumber, destPileNumber,
                     card_shifting, value_table.get(card_shifting.getValue()));
           }
@@ -171,8 +188,9 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
                   card_shifting, value_table.get(card_shifting.getValue()));
         }
 
+
         if (destination.equals(PileType.OPEN) && multiple_cards.size() == 1) {
-          System.out.println("here");
+
           card_shifting = multiple_cards.get(0);
           putInOpen(source, pileNumber, destPileNumber, card_shifting);
         }
@@ -184,7 +202,7 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
           int shifting_card_value = value_table.get(card_shifting.getValue());
           // if destination is open pile, make sure it is empty.
           if (destination.equals(PileType.OPEN)) {
-            System.out.println("here");
+            //System.out.println("here");
             putInOpen(source, pileNumber, destPileNumber, card_shifting);
           }
 
@@ -212,15 +230,16 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
    */
   public void putInOpen(PileType source, int pileNumber,
                         int destPileNumber, Cards cardShifting) {
-    if (this.openPiles.getPiles().get(destPileNumber).isEmpty()) {
+    if (!this.openPiles.getPiles().get(destPileNumber).isEmpty()) {
+      throw new IllegalArgumentException("Open Pile is Not empty");
+
+    } else {
       this.openPiles
               .getPiles()
               .get(destPileNumber)
               .addFirst(cardShifting);
       removeCard(source, pileNumber);
-    } //else {
-    //throw new IllegalArgumentException("Invalid Move");
-    //}
+    }
   }
 
   /**
@@ -310,4 +329,6 @@ public class FreecellMultiMoveModel extends FreecellModelAbstract {
     //throw new IllegalArgumentException("Invalid Move");
     //}
   }
+
+
 }

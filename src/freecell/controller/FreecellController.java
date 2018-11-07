@@ -142,6 +142,9 @@ public class FreecellController<K> implements IFreecellController<K> {
           throw new IllegalStateException("Error");
 
       }
+      if (model.isGameOver()) {
+        appendHelper("\n" + "Game over.");
+      }
     }
 
     if (model.isGameOver()) {
