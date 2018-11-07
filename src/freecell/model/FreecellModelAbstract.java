@@ -214,27 +214,26 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
     // get card from foundation pile is impossible.
     if (source.equals(PileType.FOUNDATION)) {
       if (!this.foundationPiles.getPiles().get(pileNumber).isEmpty()) {
-        pile_source.addAll(this.foundationPiles.getPiles());
-        card_shifting = getShiftingCard(pile_source, pileNumber, cardIndex);
+      pile_source.addAll(this.foundationPiles.getPiles());
+      card_shifting = getShiftingCard(pile_source, pileNumber, cardIndex);
       }
     }
 
     if (source.equals(PileType.OPEN)) {
       if (!this.openPiles.getPiles().get(pileNumber).isEmpty()) {
-        pile_source.addAll(this.openPiles.getPiles());
-        card_shifting = getShiftingCard(pile_source, pileNumber, cardIndex);
+      pile_source.addAll(this.openPiles.getPiles());
+      card_shifting = getShiftingCard(pile_source, pileNumber, cardIndex);
       }
     }
 
     if (source.equals(PileType.CASCADE)) {
       if (!this.cascadePiles.getPiles().get(pileNumber).isEmpty()) {
-        pile_source.addAll(this.cascadePiles.getPiles());
-        card_shifting = getShiftingCard(pile_source, pileNumber, cardIndex);
+      pile_source.addAll(this.cascadePiles.getPiles());
+      card_shifting = getShiftingCard(pile_source, pileNumber, cardIndex);
       }
     }
     return card_shifting;
   }
-
 
   /**
    * method to removeCard.
@@ -243,7 +242,6 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
    * @param pileNumber pile number of source.
    */
   public void removeCard(PileType source, int pileNumber) {
-    try {
       if (source.equals(PileType.FOUNDATION)) {
         this.foundationPiles.getPiles().get(pileNumber).pollLast();
       }
@@ -255,7 +253,6 @@ public abstract class FreecellModelAbstract implements FreecellOperations {
       if (source.equals(PileType.CASCADE)) {
         this.cascadePiles.getPiles().get(pileNumber).pollLast();
       }
-    }catch (IndexOutOfBoundsException e) {throw new IndexOutOfBoundsException("here is error");}
   }
 
   /**
